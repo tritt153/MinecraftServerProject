@@ -36,6 +36,12 @@ namespace MinecraftServer.Models.Common.Utilities.General
             throw new InvalidOperationException(sMessage);
         }
 
+        [DoesNotReturn]
+        public static void ThrowArgumentOutOfRangeException(string sParamName = "", string sMessage = "Argument out of range.")
+        {
+            throw new ArgumentOutOfRangeException(sParamName, sParamName, sMessage);
+        }
+
         #endregion // Public Methods - Static
     }
 }

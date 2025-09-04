@@ -1,8 +1,7 @@
-﻿using MinecraftServer.Models.Common.Json_Messages;
-using MinecraftServer.Models.Common.Json_Messages.Json_Events;
-using MinecraftServer.Models.Common.JsonMessages;
+﻿using MinecraftServer.Models.Common.JSON.Events;
+using MinecraftServer.Models.Common.JSON.Messages;
 using static MinecraftServer.Models.Common.Constants.Constants;
-using static MinecraftServer.Models.Common.Json_Messages.Constants.JsonTextColor;
+using static MinecraftServer.Models.Common.JSON.Constants.JsonTextColor;
 
 namespace MinecraftServer.Models.Common.Utilities.Extension_Methods
 {
@@ -52,7 +51,7 @@ namespace MinecraftServer.Models.Common.Utilities.Extension_Methods
 
         public static JsonMessageSegment NewLine(this JsonMessageSegment oMsg, int nNumNewLines = 1)
         {
-            return oMsg with { Text = oMsg.Text.Append(STRING_NEW_LINE, nNumNewLines) };
+            return oMsg with { Text = oMsg.Text.Append(JSON_STRING_NEW_LINE, nNumNewLines) };
         }
 
         public static JsonMessageSegment Space(this JsonMessageSegment oMsg, int nNumNewSpaces = 1)

@@ -1,17 +1,26 @@
 ﻿using MinecraftServer.Models.Common.Utilities.General;
 using System.Diagnostics.CodeAnalysis;
+using System.Text.Encodings.Web;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace MinecraftServer.Models.Common.JsonMessages
+namespace MinecraftServer.Models.Common.JSON.Messages
 {
     public class JsonMessage : IValidatable
     {
         #region Json Properties
 
+        /// <summary>
+        /// This property is necessary for JSON strings in Minecraft, the JSON must start with a "text" attribute, or parsing will fail.
+        /// </summary>
+        [NotNull]
+        [JsonPropertyName("text")]
+        public required string RootText { get; init; } = "";
+
         [NotNull]
         [JsonPropertyName("extra")]
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-        public required List<JsonMessageSegment>? Segments { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public required List<JsonMessageSegment>? Segments { get; init; }
 
         #endregion // Json Properties
 
@@ -23,18 +32,32 @@ namespace MinecraftServer.Models.Common.JsonMessages
             Segments = [oMsg];
         }
 
+        [SetsRequiredMembers]
+        public JsonMessage(params JsonMessageSegment[] oSegments)
+        {
+            Segments = [.. oSegments];
+        }
+
         #endregion // Constructor
 
-        #region Public Methods
+        #region ToString 
+
+        /// <summary>
+        /// Serializes this object into a string in the format expected by Minecraft.
+        /// </summary>
+        /// <returns>string - The JSON message as a formatted string.</returns>
+        public override string ToString()
+        {
+            return JsonSerializer.Serialize(this, new JsonSerializerOptions
+            {
+                WriteIndented = false,
+                DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault
+            });
+        }
 
         #endregion // Public Methods
 
         #region Operator Override(s)
-
-        public static implicit operator JsonMessage(JsonMessageSegment oMsgSegment)
-        {
-            return new JsonMessage(oMsgSegment);
-        }
 
         public static JsonMessage operator +(JsonMessage oFullMsg, JsonMessageSegment oSegment)
         {
@@ -44,17 +67,6 @@ namespace MinecraftServer.Models.Common.JsonMessages
 
             return oFullMsg;
         }
-
-        public static JsonMessage operator +(JsonMessage oFullMsg, string sText)
-        {
-            StringValidation.Validate(sText, Validator.eStringValidationOptions.NotNullNotEmpty);
-            Validator.ValidateParams(oFullMsg);
-
-            oFullMsg.Segments.Add(new JsonMessageSegment(sText));
-
-            return oFullMsg;
-        }
-
 
         public static JsonMessage operator +(JsonMessage oMsgLeft, JsonMessage oMsgRight)
         {

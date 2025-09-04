@@ -1,7 +1,8 @@
-﻿using MinecraftServer.Models.Common.JsonMessages;
+﻿using MinecraftServer.Models.Common.JSON.Events;
+using MinecraftServer.Models.Common.JSON.Messages;
 using MinecraftServer.Models.Common.Utilities.Extension_Methods;
 using System.Windows;
-using static MinecraftServer.Models.Common.Json_Messages.Constants.JsonTextColor;
+using static MinecraftServer.Models.Common.JSON.Constants.JsonTextColor;
 
 namespace MinecraftServer
 {
@@ -12,7 +13,24 @@ namespace MinecraftServer
     {
         public MainWindow()
         {
-            //JsonMessage oTest = "Hello".Color(eTextColor.Aqua).Italicize().Bold().Obfuscate().Strikethrough().Underline() + "World".Bold();
+            string sName = "Test";
+
+            JsonMessage oTest = "One"
+                                    .Color(eTextColor.Aqua)
+                                    .Italicize()
+                                    .Bold()
+                                    .Obfuscate()
+                                    .Strikethrough()
+                                    .Underline()
+                                    .NewLine(3)
+                              + "Two"
+                                    .Color(eTextColor.Red)
+                              + "Three"
+                                    .Color(eTextColor.Gray)
+                              + sName
+                                    .Color(eTextColor.Black).Obfuscate().HoverEvent(JsonHoverEvent.ShowText("Click for help".Text())).ClickEvent(JsonClickEvent.RunCommand("/help"));
+
+            string sTest = oTest.ToString();
 
             InitializeComponent();
         }

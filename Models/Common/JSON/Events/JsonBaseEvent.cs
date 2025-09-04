@@ -1,7 +1,8 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using MinecraftServer.Models.Common.Utilities.General;
+using System.Diagnostics.CodeAnalysis;
 using System.Text.Json.Serialization;
 
-namespace MinecraftServer.Models.Common.Json_Messages
+namespace MinecraftServer.Models.Common.JSON.Events
 {
     public record JsonBaseEvent
     {
@@ -9,6 +10,7 @@ namespace MinecraftServer.Models.Common.Json_Messages
 
         [NotNull] // or empty
         [JsonPropertyName("action")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public required string Action { get; init; }
 
         #endregion // Json Properties
@@ -18,10 +20,7 @@ namespace MinecraftServer.Models.Common.Json_Messages
         [SetsRequiredMembers]
         public JsonBaseEvent(string sAction)
         {
-            if (string.IsNullOrEmpty(sAction))
-            {
-                throw new ArgumentNullException(nameof(sAction));
-            }
+            StringValidator.Validate(sAction, StringValidator.eStringValidationOptions.All);
 
             Action = sAction;
         }
