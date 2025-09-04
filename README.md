@@ -1,6 +1,8 @@
-# Minecraft Server Wrapper
+# Minecraft Server Wrapper (Rewrite)
 
 A powerful desktop application for running, managing, and enhancing vanilla Minecraft (Java Edition) servers. This will be done using C# (.NET 8.0) with WPF, and strict adherence to the Model-View-ViewModel (MVVM) pattern.  
+
+This project will be a rewrite of the MinecraftServer project.
 
 ---
 
