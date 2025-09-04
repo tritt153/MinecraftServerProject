@@ -1,4 +1,6 @@
-﻿namespace MinecraftServer.Models.Common.Json_Messages.Constants
+﻿using MinecraftServer.Models.Common.Utilities.General;
+
+namespace MinecraftServer.Models.Common.JSON.Constants
 {
     public static class JsonTextColor
     {
@@ -62,14 +64,14 @@
 
         #region Public Methods - Static
 
-        internal static string ToString(this eTextColor eColor)
+        public static string GetString(this eTextColor eColor)
         {
-            if (_dicColors.TryGetValue(eColor, out string? sColor))
+            if (!_dicColors.ContainsKey(eColor))
             {
-                return sColor;
+                Thrower.ThrowArgumentOutOfRangeException(sMessage: "Text color does not exist!");
             }
-
-            throw new ArgumentOutOfRangeException(nameof(eColor), eColor, "Text color does not exist!");
+            
+            return _dicColors[eColor];
         }
 
         #endregion // Public Methods - Static

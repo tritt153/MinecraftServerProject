@@ -1,8 +1,8 @@
-﻿using MinecraftServer.Models.Common.JsonMessages;
+﻿using MinecraftServer.Models.Common.JSON.Messages;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json.Serialization;
 
-namespace MinecraftServer.Models.Common.Json_Messages.Json_Events
+namespace MinecraftServer.Models.Common.JSON.Events
 {
     public record JsonHoverEvent : JsonBaseEvent
     {
@@ -10,7 +10,7 @@ namespace MinecraftServer.Models.Common.Json_Messages.Json_Events
 
         [NotNull]
         [JsonPropertyName("contents")]
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public required JsonMessage Contents { get; init; }
 
         #endregion // Json Properties
@@ -20,11 +20,12 @@ namespace MinecraftServer.Models.Common.Json_Messages.Json_Events
         [SetsRequiredMembers]
         public JsonHoverEvent(string sAction, JsonMessage oContents) : base(sAction)
         {
-            Contents = oContents ?? throw new ArgumentNullException(nameof(oContents));
+            oContents.Validate();
+
+            Contents = oContents;
         }
 
         #endregion // Constructor
-
 
         #region Public Methods - Static
 

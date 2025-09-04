@@ -1,8 +1,7 @@
-﻿using MinecraftServer.Models.Common.Json_Messages;
-using MinecraftServer.Models.Common.Json_Messages.Json_Events;
-using MinecraftServer.Models.Common.JsonMessages;
+﻿using MinecraftServer.Models.Common.JSON.Events;
+using MinecraftServer.Models.Common.JSON.Messages;
 using static MinecraftServer.Models.Common.Constants.Constants;
-using static MinecraftServer.Models.Common.Json_Messages.Constants.JsonTextColor;
+using static MinecraftServer.Models.Common.JSON.Constants.JsonTextColor;
 
 namespace MinecraftServer.Models.Common.Utilities.Extension_Methods
 {
@@ -12,68 +11,73 @@ namespace MinecraftServer.Models.Common.Utilities.Extension_Methods
 
         #region Json Messages
 
-        public static JsonMessageSegment Color(this string oText, eTextColor eColor)
+        public static JsonMessageSegment Text(this string sText)
         {
-            return new JsonMessageSegment(oText, eColor);
+            return new JsonMessageSegment(sText: sText);
         }
 
-        public static JsonMessageSegment Bold(this string oText)
+        public static JsonMessageSegment Color(this string sText, eTextColor eColor)
         {
-            return new JsonMessageSegment(oText, bBold: true);
+            return new JsonMessageSegment(sText: sText, eColor: eColor);
         }
 
-        public static JsonMessageSegment Italicize(this string oText)
+        public static JsonMessageSegment Bold(this string sText)
         {
-            return new JsonMessageSegment(oText, bItalicize: true);
+            return new JsonMessageSegment(sText: sText, bBold: true);
         }
 
-        public static JsonMessageSegment Underline(this string oText)
+        public static JsonMessageSegment Italicize(this string sText)
         {
-            return new JsonMessageSegment(oText, bUnderline: true);
+            return new JsonMessageSegment(sText: sText, bItalicize: true);
         }
 
-        public static JsonMessageSegment StrikeThrough(this string oText)
+        public static JsonMessageSegment Underline(this string sText)
         {
-            return new JsonMessageSegment(oText, bStrikethrough: true);
+            return new JsonMessageSegment(sText: sText, bUnderline: true);
         }
 
-        public static JsonMessageSegment Obfuscate(this string oText)
+        public static JsonMessageSegment StrikeThrough(this string sText)
         {
-            return new JsonMessageSegment(oText, bObfuscate: true);
+            return new JsonMessageSegment(sText: sText, bStrikethrough: true);
         }
 
-        public static JsonMessageSegment ClickEvent(this string oText, JsonClickEvent oClickEvent)
+        public static JsonMessageSegment Obfuscate(this string sText)
         {
-            return new JsonMessageSegment(oText, oClickEvent: oClickEvent);
+            return new JsonMessageSegment(sText: sText, bObfuscate: true);
         }
 
-        public static JsonMessageSegment HoverEvent(this string oText, JsonHoverEvent oHoverEvent)
+        public static JsonMessageSegment ClickEvent(this string sText, JsonClickEvent oClickEvent)
         {
-            return new JsonMessageSegment(oText, oHoverEvent: oHoverEvent);
+            return new JsonMessageSegment(sText: sText, oClickEvent: oClickEvent);
         }
 
-        public static JsonMessageSegment NewLine(this string oText, int nNumNewLines = 1)
+        public static JsonMessageSegment HoverEvent(this string sText, JsonHoverEvent oHoverEvent)
         {
-            return new JsonMessageSegment(oText.Append(STRING_NEW_LINE, nNumNewLines));
+            return new JsonMessageSegment(sText: sText, oHoverEvent: oHoverEvent);
         }
 
-        public static JsonMessageSegment Space(this string oText, int nNumSpaces = 1)
+        public static JsonMessageSegment NewLine(this string sText, int nNumNewLines = 1)
         {
-            return new JsonMessageSegment(oText.Append(STRING_SPACE, nNumSpaces));
+            return new JsonMessageSegment(sText: sText.Append(JSON_STRING_NEW_LINE, nNumNewLines));
+        }
+
+        public static JsonMessageSegment Space(this string sText, int nNumSpaces = 1)
+        {
+            return new JsonMessageSegment(sText: sText.Append(STRING_SPACE, nNumSpaces));
         }
 
         #endregion // Json Messages
 
         #region General
 
-        public static string Append(this string oText, string sToAppend, int nRepeat = 1)
+        public static string Append(this string sText, string sToAppend, int nRepeat = 1)
         {
             for (int nNewLineIndex = 0; nNewLineIndex < nRepeat; nNewLineIndex++)
             {
-                oText += sToAppend;
+                sText += sToAppend;
             }
 
-            return oText;
+            return sText;
         }
 
         #endregion // General

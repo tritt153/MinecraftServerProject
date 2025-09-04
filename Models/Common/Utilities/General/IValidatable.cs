@@ -7,6 +7,5 @@
         public void Validate();
 
         #endregion // Public Methods - Interface
-
     }
 }
