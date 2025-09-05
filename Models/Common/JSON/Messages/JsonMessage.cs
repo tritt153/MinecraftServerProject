@@ -1,6 +1,5 @@
 ﻿using MinecraftServer.Models.Common.Utilities.General;
 using System.Diagnostics.CodeAnalysis;
-using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -29,12 +28,16 @@ namespace MinecraftServer.Models.Common.JSON.Messages
         [SetsRequiredMembers]
         public JsonMessage(JsonMessageSegment oMsg)
         {
+            Validator.ValidateParam(oMsg);
+
             Segments = [oMsg];
         }
 
         [SetsRequiredMembers]
         public JsonMessage(params JsonMessageSegment[] oSegments)
         {
+            Validator.ValidateParams(oSegments);
+
             Segments = [.. oSegments];
         }
 

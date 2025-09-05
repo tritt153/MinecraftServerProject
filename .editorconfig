@@ -74,3 +74,9 @@ dotnet_style_coalesce_expression = true:suggestion
 dotnet_style_null_propagation = true:suggestion
 dotnet_style_prefer_is_null_check_over_reference_equality_method = true:suggestion
 dotnet_style_prefer_auto_properties = true:silent
+
+# IDE0028: Simplify collection initialization
+dotnet_style_collection_initializer = false
+
+# IDE0028: Simplify collection initialization
+dotnet_diagnostic.IDE0028.severity = none

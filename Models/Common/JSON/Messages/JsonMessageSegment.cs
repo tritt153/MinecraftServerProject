@@ -2,7 +2,7 @@
 using MinecraftServer.Models.Common.Utilities.General;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json.Serialization;
-using static MinecraftServer.Models.Common.JSON.Constants.JsonTextColor;
+using static MinecraftServer.Models.Common.JSON.Messages.JsonTextColor;
 
 namespace MinecraftServer.Models.Common.JSON.Messages
 {
@@ -81,7 +81,7 @@ namespace MinecraftServer.Models.Common.JSON.Messages
         #region Operator Override(s)
 
         /// <summary>
-        /// Implicitly converts a signle segment into a full message, so a segment can be use in context's that expect a 'full' message.
+        /// Implicitly converts a single segment into a full message, so a segment can be use in context's that expect a 'full' message.
         /// </summary>
         /// <param name="oSegment">JsonMessageSegment - The segment to convert.</param>
         public static implicit operator JsonMessage(JsonMessageSegment oSegment)

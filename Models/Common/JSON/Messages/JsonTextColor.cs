@@ -1,6 +1,6 @@
 ﻿using MinecraftServer.Models.Common.Utilities.General;
 
-namespace MinecraftServer.Models.Common.JSON.Constants
+namespace MinecraftServer.Models.Common.JSON.Messages
 {
     public static class JsonTextColor
     {
@@ -8,12 +8,15 @@ namespace MinecraftServer.Models.Common.JSON.Constants
 
         #region General
 
-        public const eTextColor DEFAULT_TEXT_COLOR = eTextColor.Gold;  
+        public const eTextColor DEFAULT_TEXT_COLOR = eTextColor.White;  
 
         #endregion // General
 
         #region Color Dictionary
 
+        /// <summary>
+        /// Dictionary of enum keys mapping all available text colors in Minecraft, in their expected string format. 
+        /// </summary>
         private static readonly Dictionary<eTextColor, string> _dicColors = new Dictionary<eTextColor, string>()
         {
             [eTextColor.Black] = "black",

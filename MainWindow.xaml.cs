@@ -2,7 +2,7 @@
 using MinecraftServer.Models.Common.JSON.Messages;
 using MinecraftServer.Models.Common.Utilities.Extension_Methods;
 using System.Windows;
-using static MinecraftServer.Models.Common.JSON.Constants.JsonTextColor;
+using static MinecraftServer.Models.Common.JSON.Messages.JsonTextColor;
 
 namespace MinecraftServer
 {
@@ -28,7 +28,10 @@ namespace MinecraftServer
                               + "Three"
                                     .Color(eTextColor.Gray)
                               + sName
-                                    .Color(eTextColor.Black).Obfuscate().HoverEvent(JsonHoverEvent.ShowText("Click for help".Text())).ClickEvent(JsonClickEvent.RunCommand("/help"));
+                                    .Color(eTextColor.Black)
+                                    .Obfuscate()
+                                    .HoverEvent(JsonHoverEvent.ShowText("Click for help".Text()))
+                                    .ClickEvent(JsonClickEvent.RunCommand("/help"));
 
             string sTest = oTest.ToString();
 
