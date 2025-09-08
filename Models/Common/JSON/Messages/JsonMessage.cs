@@ -1,4 +1,5 @@
-﻿using MinecraftServer.Models.Common.Utilities.General;
+﻿using MinecraftServer.Common.General;
+using MinecraftServer.Models.Common.JSON.Constants;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -64,7 +65,8 @@ namespace MinecraftServer.Models.Common.JSON.Messages
 
         public static JsonMessage operator +(JsonMessage oFullMsg, JsonMessageSegment oSegment)
         {
-            Validator.ValidateParams(oFullMsg, oSegment);
+            Validator.ValidateParam(oFullMsg);
+            Validator.ValidateParam(oSegment);
 
             oFullMsg.Segments.Add(oSegment);
 
@@ -73,7 +75,8 @@ namespace MinecraftServer.Models.Common.JSON.Messages
 
         public static JsonMessage operator +(JsonMessage oMsgLeft, JsonMessage oMsgRight)
         {
-            Validator.ValidateParams(oMsgLeft, oMsgRight);
+            Validator.ValidateParam(oMsgLeft);
+            Validator.ValidateParam(oMsgLeft);
 
             foreach (JsonMessageSegment oSegment in oMsgRight.Segments)
             {
@@ -91,7 +94,7 @@ namespace MinecraftServer.Models.Common.JSON.Messages
         {
             if (Segments == null || Segments.Count == 0)
             {
-                Thrower.ThrowInvalidOperationException("Message must have at least one segment!");
+                Thrower.ThrowInvalidOperationException(JsonErrorMessages.MessageSegmentInvalid(), nameof(Segments));
             }
         }
 

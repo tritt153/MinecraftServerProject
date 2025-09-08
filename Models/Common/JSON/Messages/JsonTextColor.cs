@@ -1,4 +1,5 @@
-﻿using MinecraftServer.Models.Common.Utilities.General;
+﻿using MinecraftServer.Common.General;
+using MinecraftServer.Models.Common.JSON.Constants;
 
 namespace MinecraftServer.Models.Common.JSON.Messages
 {
@@ -71,7 +72,7 @@ namespace MinecraftServer.Models.Common.JSON.Messages
         {
             if (!_dicColors.ContainsKey(eColor))
             {
-                Thrower.ThrowArgumentOutOfRangeException(sMessage: "Text color does not exist!");
+                Thrower.ThrowArgumentOutOfRangeException(JsonErrorMessages.TextColorNotFound(), nameof(_dicColors));
             }
             
             return _dicColors[eColor];

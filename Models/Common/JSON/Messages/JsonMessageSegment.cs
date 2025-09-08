@@ -1,5 +1,6 @@
-﻿using MinecraftServer.Models.Common.JSON.Events;
-using MinecraftServer.Models.Common.Utilities.General;
+﻿using MinecraftServer.Common.General;
+using MinecraftServer.Models.Common.JSON.Events;
+using MinecraftServer.Models.Common.Utilities.Extension_Methods;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json.Serialization;
 using static MinecraftServer.Models.Common.JSON.Messages.JsonTextColor;
@@ -57,7 +58,7 @@ namespace MinecraftServer.Models.Common.JSON.Messages
         [SetsRequiredMembers]
         public JsonMessageSegment(string sText, eTextColor eColor = DEFAULT_TEXT_COLOR, bool? bBold = null, bool? bItalicize = null, bool? bUnderline = null, bool? bStrikethrough = null, bool? bObfuscate = null, JsonClickEvent? oClickEvent = null, JsonHoverEvent? oHoverEvent = null)
         {
-            StringValidator.Validate(sText, StringValidator.eStringValidationOptions.NotNullNotEmpty, nameof(sText));
+            Validator.ValidateString(sText, Validator.eStringValidationOptions.NotNullNotEmpty);
 
             Text = sText;
             Color = eColor;
@@ -71,11 +72,6 @@ namespace MinecraftServer.Models.Common.JSON.Messages
             HoverEvent = oHoverEvent;
         }
 
-        public void Validate()
-        {
-            StringValidator.Validate(Text, StringValidator.eStringValidationOptions.NotNullNotEmpty, nameof(Text));
-        }
-
         #endregion // Constructor
 
         #region Operator Override(s)
@@ -86,29 +82,37 @@ namespace MinecraftServer.Models.Common.JSON.Messages
         /// <param name="oSegment">JsonMessageSegment - The segment to convert.</param>
         public static implicit operator JsonMessage(JsonMessageSegment oSegment)
         {
+            Validator.ValidateParam(oSegment);
+
             return new JsonMessage(oSegment);
+        }
+
+        /// <summary>
+        /// Implicitly converts a string into a message segment with no proerties default properties.
+        /// </summary>
+        /// <param name="oSegment">JsonMessageSegment - The segment to convert.</param>
+        public static implicit operator JsonMessageSegment(string sText)
+        {
+            return new JsonMessageSegment(sText);
         }
 
         public static JsonMessage operator +(JsonMessageSegment oSegmentLeft, JsonMessageSegment oSegmentRight)
         {
-            Validator.ValidateParams(oSegmentLeft, oSegmentRight);
+            Validator.ValidateParam(oSegmentLeft);
+            Validator.ValidateParam(oSegmentRight);
 
             return new JsonMessage(oSegmentLeft, oSegmentRight);
         }
 
-        public static JsonMessage operator +(string sText, JsonMessageSegment oFullMsg)
-        {
-            StringValidator.Validate(sText, StringValidator.eStringValidationOptions.NotNullNotEmpty);
-            Validator.ValidateParams(oFullMsg);
-
-            return new JsonMessage(new JsonMessageSegment(sText));
-        }
-
-        public static JsonMessage operator +(JsonMessageSegment oFullMsg, string sText)
-        {
-            return sText + oFullMsg;
-        }
-
         #endregion // Operator Override(s)
+
+        #region IValidatable
+
+        public void Validate()
+        {
+            Validator.ValidateString(Text, Validator.eStringValidationOptions.NotNullNotEmpty);
+        }
+
+        #endregion // IValidatable
     }
 }

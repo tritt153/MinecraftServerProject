@@ -1,4 +1,4 @@
-﻿using MinecraftServer.Models.Common.Utilities.General;
+﻿using MinecraftServer.Common.General;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json.Serialization;
 
@@ -20,7 +20,7 @@ namespace MinecraftServer.Models.Common.JSON.Events
         [SetsRequiredMembers]
         public JsonBaseEvent(string sAction)
         {
-            StringValidator.Validate(sAction, StringValidator.eStringValidationOptions.All);
+            Validator.ValidateString(sAction);
 
             Action = sAction;
         }

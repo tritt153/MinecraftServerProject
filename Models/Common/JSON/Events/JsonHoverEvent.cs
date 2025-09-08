@@ -1,4 +1,5 @@
-﻿using MinecraftServer.Models.Common.JSON.Messages;
+﻿using MinecraftServer.Common.General;
+using MinecraftServer.Models.Common.JSON.Messages;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json.Serialization;
 
@@ -20,7 +21,7 @@ namespace MinecraftServer.Models.Common.JSON.Events
         [SetsRequiredMembers]
         public JsonHoverEvent(string sAction, JsonMessage oContents) : base(sAction)
         {
-            oContents.Validate();
+            Validator.ValidateParam(oContents);
 
             Contents = oContents;
         }

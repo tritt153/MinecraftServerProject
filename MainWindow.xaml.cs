@@ -31,7 +31,8 @@ namespace MinecraftServer
                                     .Color(eTextColor.Black)
                                     .Obfuscate()
                                     .HoverEvent(JsonHoverEvent.ShowText("Click for help".Text()))
-                                    .ClickEvent(JsonClickEvent.RunCommand("/help"));
+                                    .ClickEvent(JsonClickEvent.RunCommand("/help")) 
+                              + "Magic";
 
             string sTest = oTest.ToString();
 

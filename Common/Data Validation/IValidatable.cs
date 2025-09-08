@@ -1,4 +1,4 @@
-﻿namespace MinecraftServer.Models.Common.Utilities.General
+﻿namespace MinecraftServer.Common.General
 {
     public interface IValidatable
     {
