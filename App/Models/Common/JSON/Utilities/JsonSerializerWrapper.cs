@@ -1,9 +1,8 @@
 ﻿using MinecraftServer.Common.General;
-using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace MinecraftServer.Models.Common.JSON.Messages
+namespace MinecraftServer.Models.Common.JSON.Utilities
 {
     public class JsonSerializerWrapper
     {

@@ -1,5 +1,5 @@
 ﻿using MinecraftServer.Models.Common.JSON.Events;
-using MinecraftServer.Models.Common.JSON.Messages;
+using MinecraftServer.Models.Common.JSON.Utilities;
 using MinecraftServerTests.Test_Utilities.Helper_Methods;
 using Moq;
 using System.Diagnostics.CodeAnalysis;

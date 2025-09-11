@@ -1,5 +1,5 @@
 ﻿using MinecraftServer.Models.Common.JSON.Events;
-using MinecraftServer.Models.Common.JSON.Messages;
+using MinecraftServer.Models.Common.JSON.Utilities;
 using MinecraftServerTests.Test_Utilities.Helper_Methods;
 
 namespace MinecraftServerTests.Models.JSON.Events
@@ -24,6 +24,7 @@ namespace MinecraftServerTests.Models.JSON.Events
         }
 
         [Fact]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0090:Use 'new(...)'", Justification = "<Pending>")]
         public void Constructor_ValidStringInput_CreatesObject()
         {
             JsonClickEvent oTestEvent = new JsonClickEvent(VALID_STRING_INPUT, VALID_STRING_INPUT);
