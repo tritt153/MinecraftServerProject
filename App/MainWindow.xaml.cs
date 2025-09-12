@@ -2,7 +2,7 @@
 using MinecraftServer.Models.Common.JSON.Messages;
 using MinecraftServer.Models.Common.JSON.Utilities;
 using System.Windows;
-using static MinecraftServer.Models.Common.JSON.Messages.JsonTextColor;
+using static MinecraftServer.Models.Common.JSON.Utilities.JsonTextColor;
 
 namespace MinecraftServer
 {

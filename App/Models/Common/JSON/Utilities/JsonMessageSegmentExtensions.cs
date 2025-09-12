@@ -1,7 +1,7 @@
 ﻿using MinecraftServer.Models.Common.JSON.Events;
 using MinecraftServer.Models.Common.JSON.Messages;
 using static MinecraftServer.Models.Common.JSON.Constants.JsonConstants;
-using static MinecraftServer.Models.Common.JSON.Messages.JsonTextColor;
+using static MinecraftServer.Models.Common.JSON.Utilities.JsonTextColor;
 
 namespace MinecraftServer.Models.Common.JSON.Utilities
 {
@@ -11,7 +11,7 @@ namespace MinecraftServer.Models.Common.JSON.Utilities
 
         public static JsonMessageSegment Color(this JsonMessageSegment oMsg, eTextColor eColor)
         {
-            return oMsg with { Color = eColor };
+            return oMsg with { ColorString = eColor.GetString() };
         }
 
         public static JsonMessageSegment Bold(this JsonMessageSegment oMsg)

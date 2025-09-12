@@ -1,11 +1,14 @@
 ﻿using MinecraftServer.Common.General;
-using MinecraftServerTests.Test_Utilities.Helper_Methods;
+using MinecraftServerTests.Test_Utilities;
 using Moq;
+using static MinecraftServerTests.Test_Utilities.Constants;
 
 namespace MinecraftServerTests.Common.Data_Validation
 {
     public class ValidatorTests
     {
+        #region Public Method - Tests
+
         [Fact]
         public void CheckNull_NullParamter_ThrowsArgumentNullException()
         {
@@ -17,7 +20,7 @@ namespace MinecraftServerTests.Common.Data_Validation
         [Fact]
         public void ValidateParams_NullParameterList_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() => Validator.ValidateParams("", null!));
+            Assert.Throws<ArgumentNullException>(() => Validator.ValidateParams(string.Empty, null!));
         }
 
         [Fact]
@@ -25,7 +28,7 @@ namespace MinecraftServerTests.Common.Data_Validation
         {
             IValidatable? oNullObj1 = null;
 
-            Assert.Throws<ArgumentNullException>(() => Validator.ValidateParams("", oNullObj1!));
+            Assert.Throws<ArgumentNullException>(() => Validator.ValidateParams(string.Empty, oNullObj1!));
         }
 
 
@@ -35,7 +38,7 @@ namespace MinecraftServerTests.Common.Data_Validation
             IValidatable? oNullObj1 = null;
             IValidatable? oNullObj2 = null;
 
-            Assert.Throws<ArgumentNullException>(() => Validator.ValidateParams("", oNullObj1!, oNullObj2!));
+            Assert.Throws<ArgumentNullException>(() => Validator.ValidateParams(string.Empty, oNullObj1!, oNullObj2!));
         }
 
         [Fact]
@@ -44,7 +47,7 @@ namespace MinecraftServerTests.Common.Data_Validation
             Mock<IValidatable> oRealObj = new();
             IValidatable? oNullObj = null;
 
-            Assert.Throws<ArgumentNullException>(() => Validator.ValidateParams("", oRealObj.Object, oNullObj!));
+            Assert.Throws<ArgumentNullException>(() => Validator.ValidateParams(string.Empty, oRealObj.Object, oNullObj!));
         }
 
         [Fact]
@@ -52,7 +55,7 @@ namespace MinecraftServerTests.Common.Data_Validation
         {
             Mock<IValidatable> oMockValidatable = new();
 
-            Validator.ValidateParams("", oMockValidatable.Object);
+            Validator.ValidateParams(string.Empty, oMockValidatable.Object);
 
             oMockValidatable.Verify(x => x.Validate(), Times.Once);
         }
@@ -64,9 +67,9 @@ namespace MinecraftServerTests.Common.Data_Validation
             Mock<IValidatable> oMockValidatable2 = new();
             Mock<IValidatable> oMockValidatable3 = new();
 
-            Validator.ValidateParams("", oMockValidatable1.Object);
-            Validator.ValidateParams("", oMockValidatable2.Object);
-            Validator.ValidateParams("", oMockValidatable3.Object);
+            Validator.ValidateParams(string.Empty, oMockValidatable1.Object);
+            Validator.ValidateParams(string.Empty, oMockValidatable2.Object);
+            Validator.ValidateParams(string.Empty, oMockValidatable3.Object);
 
             oMockValidatable1.Verify(x => x.Validate(), Times.Once);
             oMockValidatable2.Verify(x => x.Validate(), Times.Once);
@@ -109,7 +112,7 @@ namespace MinecraftServerTests.Common.Data_Validation
         [InlineData(Validator.eStringValidationOptions.All, typeof(ArgumentException))]
         public void ValidateString_EmptyString_ValidatesOrThrowsExpectedException(Validator.eStringValidationOptions eOptions, Type? tExpectedExceptionType = null)
         {
-            string sEmptyString = string.Empty;
+            string sEmptyString = STRING_INPUT_EMPTY;
 
             ExceptionAssert.Throws(tExpectedExceptionType, () =>
             {
@@ -126,7 +129,7 @@ namespace MinecraftServerTests.Common.Data_Validation
         [InlineData(Validator.eStringValidationOptions.All, typeof(ArgumentException))]
         public void ValidateString_WhiteSpaceString_ValidatesOrThrowsArgumentException(Validator.eStringValidationOptions eOptions, Type? tExpectedExceptionType = null)
         {
-            string sWhiteSpaceString = "   \t\t\t";
+            string sWhiteSpaceString = STRING_INPUT_SPACES + STRING_INPUT_TABS;
 
             ExceptionAssert.Throws(tExpectedExceptionType, () =>
             {
@@ -143,12 +146,14 @@ namespace MinecraftServerTests.Common.Data_Validation
         [InlineData(Validator.eStringValidationOptions.All)]
         public void ValidateString_ValidString_ThrowsNothing(Validator.eStringValidationOptions eOptions)
         {
-            string sValidString = "Test Input";
+            string sValidString = VALID_STRING_INPUT;
 
             ExceptionAssert.DoesNotThrow(() =>
             {
                 Validator.ValidateString(sValidString, eOptions);
             });
         }
+
+        #endregion // Public Method - Tests
     }
 }

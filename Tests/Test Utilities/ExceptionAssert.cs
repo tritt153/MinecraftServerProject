@@ -1,4 +1,4 @@
-﻿namespace MinecraftServerTests.Test_Utilities.Helper_Methods
+﻿namespace MinecraftServerTests.Test_Utilities
 {
     internal static class ExceptionAssert
     {

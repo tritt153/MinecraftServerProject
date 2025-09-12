@@ -1,8 +1,9 @@
 ﻿using MinecraftServer.Common.General;
 using MinecraftServer.Models.Common.JSON.Events;
+using MinecraftServer.Models.Common.JSON.Utilities;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json.Serialization;
-using static MinecraftServer.Models.Common.JSON.Messages.JsonTextColor;
+using static MinecraftServer.Models.Common.JSON.Utilities.JsonTextColor;
 
 namespace MinecraftServer.Models.Common.JSON.Messages
 {
@@ -12,55 +13,70 @@ namespace MinecraftServer.Models.Common.JSON.Messages
 
         [NotNull] // or empty
         [JsonPropertyName("text")]
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public required string Text { get; init; }
 
         [JsonIgnore]
-        public required eTextColor Color { get; init; }
+        public eTextColor Color
+        {
+            get
+            {
+                if (string.IsNullOrWhiteSpace(ColorString))
+                {
+                    return DEFAULT_TEXT_COLOR;
+                }
+                else
+                {
+                    return JsonTextColor.GetTextColorEnum(ColorString);
+                }
+            }
+        }
 
+        [NotNull]
         [JsonPropertyName("color")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-        public required string ColorString { get; init; }
+        public string? ColorString { get; init; }
 
         [JsonPropertyName("bold")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-        public required bool? Bold { get; init; }
+        public bool? Bold { get; init; }
 
         [JsonPropertyName("italic")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-        public required bool? Italicize { get; init; }
+        public bool? Italicize { get; init; }
 
         [JsonPropertyName("underlined")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-        public required bool? Underline { get; init; }
+        public bool? Underline { get; init; }
 
         [JsonPropertyName("strikethrough")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-        public required bool? Strikethrough { get; init; }
+        public bool? Strikethrough { get; init; }
 
         [JsonPropertyName("obfuscated")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-        public required bool? Obfuscate { get; init; }
+        public bool? Obfuscate { get; init; }
 
         [JsonPropertyName("clickEvent")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-        public required JsonClickEvent? ClickEvent { get; init; }
+        public JsonClickEvent? ClickEvent { get; init; }
 
         [JsonPropertyName("hoverEvent")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-        public required JsonHoverEvent? HoverEvent { get; init; }
+        public JsonHoverEvent? HoverEvent { get; init; }
 
         #endregion // Json Properties
 
         #region Constructor
 
+        [JsonConstructor]
+        public JsonMessageSegment() { }
+
         [SetsRequiredMembers]
-        public JsonMessageSegment(string sText, eTextColor eColor = DEFAULT_TEXT_COLOR, bool? bBold = null, bool? bItalicize = null, bool? bUnderline = null, bool? bStrikethrough = null, bool? bObfuscate = null, JsonClickEvent? oClickEvent = null, JsonHoverEvent? oHoverEvent = null)
+        public JsonMessageSegment(string sText, eTextColor eColor = eTextColor.None , bool? bBold = null, bool? bItalicize = null, bool? bUnderline = null, bool? bStrikethrough = null, bool? bObfuscate = null, JsonClickEvent? oClickEvent = null, JsonHoverEvent? oHoverEvent = null)
         {
             Validator.ValidateString(sText, Validator.eStringValidationOptions.NotNullNotEmpty);
 
             Text = sText;
-            Color = eColor;
             ColorString = eColor.GetString();
             Bold = bBold;
             Italicize = bItalicize;

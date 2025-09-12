@@ -1,7 +1,7 @@
 ﻿using MinecraftServer.Models.Common.JSON.Events;
 using MinecraftServer.Models.Common.JSON.Messages;
 using static MinecraftServer.Models.Common.JSON.Constants.JsonConstants;
-using static MinecraftServer.Models.Common.JSON.Messages.JsonTextColor;
+using static MinecraftServer.Models.Common.JSON.Utilities.JsonTextColor;
 
 namespace MinecraftServer.Models.Common.JSON.Utilities
 {
@@ -72,7 +72,7 @@ namespace MinecraftServer.Models.Common.JSON.Utilities
 
         public static string Append(this string sText, string sToAppend, int nRepeat = 1)
         {
-            for (int nNewLineIndex = 0; nNewLineIndex < nRepeat; nNewLineIndex++)
+            for (int nAppendIndex = 0; nAppendIndex < nRepeat; nAppendIndex++)
             {
                 sText += sToAppend;
             }

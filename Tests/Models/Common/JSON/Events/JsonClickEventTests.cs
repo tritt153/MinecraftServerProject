@@ -1,48 +1,51 @@
 ﻿using MinecraftServer.Models.Common.JSON.Events;
 using MinecraftServer.Models.Common.JSON.Utilities;
-using MinecraftServerTests.Test_Utilities.Helper_Methods;
+using MinecraftServerTests.Test_Utilities;
+using static MinecraftServerTests.Models.Common.JSON.Events.JsonEventsTestsData.JsonClickEventTestsData;
+using static MinecraftServerTests.Test_Utilities.Constants;
 
-namespace MinecraftServerTests.Models.JSON.Events
+namespace MinecraftServerTests.Models.Common.JSON.Events
 {
+    /// <summary>
+    /// Contains unit testing logic for <see cref="JsonClickEvent"/>.
+    /// </summary>
+    /// <seealso cref="JsonClickEvent"/>
     public class JsonClickEventTests
     {
-        private const string VALID_STRING_INPUT = "Test Input";
-        private const string EXPECTED_JSON_SERIALIZATION = $"{{\"value\":\"{VALID_STRING_INPUT}\",\"action\":\"{JsonClickEvent.RUN_COMMAND}\"}}";
-        private const string INVALID_JSON_SERIALIZATION = $"{{\"value\":\"{""}\",\"action\":\"{JsonClickEvent.RUN_COMMAND}\"}}";
+        #region Public Method - Tests
 
         [Theory]
         [InlineData(null, typeof(ArgumentNullException))]
-        [InlineData("", typeof(ArgumentException))]
-        [InlineData("   ", typeof(ArgumentException))]
-        [InlineData("\t\t\t", typeof(ArgumentException))]
-        public void Constructor_InvalidStringInput_ThrowsExpectedException(string? sTestString, Type? tExpectedExceptionType = null)
+        [InlineData(STRING_INPUT_EMPTY, typeof(ArgumentException))]
+        [InlineData(STRING_INPUT_SPACES, typeof(ArgumentException))]
+        [InlineData(STRING_INPUT_TABS, typeof(ArgumentException))]
+        public void Constructor_InvalidStringInput_ThrowsExpectedException(string? sStringInput, Type? tExpectedExceptionType = null)
         {
             ExceptionAssert.Throws(tExpectedExceptionType, () =>
             {
-                JsonClickEvent oTestEvent = new JsonClickEvent(VALID_STRING_INPUT, sTestString!);
+                JsonClickEvent oClickEvent = new JsonClickEvent(VALID_STRING_INPUT, sStringInput!);
             });
         }
 
         [Fact]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0090:Use 'new(...)'", Justification = "<Pending>")]
         public void Constructor_ValidStringInput_CreatesObject()
         {
-            JsonClickEvent oTestEvent = new JsonClickEvent(VALID_STRING_INPUT, VALID_STRING_INPUT);
+            JsonClickEvent oClickEvent = new JsonClickEvent(VALID_STRING_INPUT, VALID_STRING_INPUT);
 
-            Assert.Equal(VALID_STRING_INPUT, oTestEvent.Action);
-            Assert.Equal(VALID_STRING_INPUT, oTestEvent.Value);
+            Assert.Equal(VALID_STRING_INPUT, oClickEvent.Action);
+            Assert.Equal(VALID_STRING_INPUT, oClickEvent.Value);
         }
 
         [Theory]
         [InlineData(null, typeof(ArgumentNullException))]
-        [InlineData("", typeof(ArgumentException))]
-        [InlineData("   ", typeof(ArgumentException))]
-        [InlineData("\t\t\t", typeof(ArgumentException))]
-        public void RunCommand_InvalidStringInput_ThrowsExpectedException(string? sTestString, Type? tExpectedExceptionType = null)
+        [InlineData(STRING_INPUT_EMPTY, typeof(ArgumentException))]
+        [InlineData(STRING_INPUT_SPACES, typeof(ArgumentException))]
+        [InlineData(STRING_INPUT_TABS, typeof(ArgumentException))]
+        public void RunCommand_InvalidStringInput_ThrowsExpectedException(string? sStringInput, Type? tExpectedExceptionType = null)
         {
             ExceptionAssert.Throws(tExpectedExceptionType, () =>
             {
-                JsonClickEvent.RunCommand(sTestString!);
+                JsonClickEvent.RunCommand(sStringInput!);
             });
         }
 
@@ -57,9 +60,9 @@ namespace MinecraftServerTests.Models.JSON.Events
 
         [Theory]
         [InlineData(null, typeof(ArgumentNullException))]
-        [InlineData("", typeof(ArgumentException))]
-        [InlineData("   ", typeof(ArgumentException))]
-        [InlineData("\t\t\t", typeof(ArgumentException))]
+        [InlineData(STRING_INPUT_EMPTY, typeof(ArgumentException))]
+        [InlineData(STRING_INPUT_SPACES, typeof(ArgumentException))]
+        [InlineData(STRING_INPUT_TABS, typeof(ArgumentException))]
         public void SuggestCommand_InvalidStringInput_ThrowsExpectedException(string? sTestString, Type? tExpectedExceptionType = null)
         {
             ExceptionAssert.Throws(tExpectedExceptionType, () =>
@@ -79,9 +82,9 @@ namespace MinecraftServerTests.Models.JSON.Events
 
         [Theory]
         [InlineData(null, typeof(ArgumentNullException))]
-        [InlineData("", typeof(ArgumentException))]
-        [InlineData("   ", typeof(ArgumentException))]
-        [InlineData("\t\t\t", typeof(ArgumentException))]
+        [InlineData(STRING_INPUT_EMPTY, typeof(ArgumentException))]
+        [InlineData(STRING_INPUT_SPACES, typeof(ArgumentException))]
+        [InlineData(STRING_INPUT_TABS, typeof(ArgumentException))]
         public void OpenUrl_InvalidStringInput_ThrowsExpectedException(string? sTestString, Type? tExpectedExceptionType = null)
         {
             ExceptionAssert.Throws(tExpectedExceptionType, () =>
@@ -101,9 +104,9 @@ namespace MinecraftServerTests.Models.JSON.Events
 
         [Theory]
         [InlineData(null, typeof(ArgumentNullException))]
-        [InlineData("", typeof(ArgumentException))]
-        [InlineData("   ", typeof(ArgumentException))]
-        [InlineData("\t\t\t", typeof(ArgumentException))]
+        [InlineData(STRING_INPUT_EMPTY, typeof(ArgumentException))]
+        [InlineData(STRING_INPUT_SPACES, typeof(ArgumentException))]
+        [InlineData(STRING_INPUT_TABS, typeof(ArgumentException))]
         public void ChangePage_InvalidStringInput_ThrowsExpectedException(string? sTestString, Type? tExpectedExceptionType = null)
         {
             ExceptionAssert.Throws(tExpectedExceptionType, () =>
@@ -123,9 +126,9 @@ namespace MinecraftServerTests.Models.JSON.Events
 
         [Theory]
         [InlineData(null, typeof(ArgumentNullException))]
-        [InlineData("", typeof(ArgumentException))]
-        [InlineData("   ", typeof(ArgumentException))]
-        [InlineData("\t\t\t", typeof(ArgumentException))]
+        [InlineData(STRING_INPUT_EMPTY, typeof(ArgumentException))]
+        [InlineData(STRING_INPUT_SPACES, typeof(ArgumentException))]
+        [InlineData(STRING_INPUT_TABS, typeof(ArgumentException))]
         public void CopyToClipboard_InvalidStringInput_ThrowsExpectedException(string? sTestString, Type? tExpectedExceptionType = null)
         {
             ExceptionAssert.Throws(tExpectedExceptionType, () =>
@@ -146,15 +149,15 @@ namespace MinecraftServerTests.Models.JSON.Events
         [Fact]
         public void Json_Serializes_Correctly()
         {
-            JsonClickEvent oTestSerialize = JsonClickEvent.RunCommand(VALID_STRING_INPUT);
+            JsonClickEvent oTestSerialize = GetMinimalValidInstance();
 
-            Assert.Equal(EXPECTED_JSON_SERIALIZATION, JsonSerializerWrapper.Serialize(oTestSerialize));
+            Assert.Equal(EXPECTED_JSON, JsonSerializerWrapper.Serialize(oTestSerialize));
         }
 
         [Fact]
         public void Json_SerializedObject_ShouldDeserializeIntoSameObject()
         {
-            JsonClickEvent oExpectedEvent = JsonClickEvent.RunCommand(VALID_STRING_INPUT);
+            JsonClickEvent oExpectedEvent = GetMinimalValidInstance();
 
             JsonClickEvent? oActualEvent = JsonSerializerWrapper.Deserialize<JsonClickEvent>
                                          (JsonSerializerWrapper.Serialize(oExpectedEvent));
@@ -167,10 +170,10 @@ namespace MinecraftServerTests.Models.JSON.Events
         [Fact]
         public void Json_ValidJson_DeserializesCorrectly()
         {
-            JsonClickEvent? oTestDeserialize = JsonSerializerWrapper.Deserialize<JsonClickEvent>(EXPECTED_JSON_SERIALIZATION);
+            JsonClickEvent? oTestDeserialize = JsonSerializerWrapper.Deserialize<JsonClickEvent>(EXPECTED_JSON);
 
             Assert.NotNull(oTestDeserialize);
-            Assert.Equal(JsonClickEvent.RUN_COMMAND, oTestDeserialize.Action);
+            Assert.Equal(VALID_STRING_INPUT, oTestDeserialize.Action);
             Assert.Equal(VALID_STRING_INPUT, oTestDeserialize.Value);
         }
 
@@ -182,24 +185,34 @@ namespace MinecraftServerTests.Models.JSON.Events
             //
             Assert.Throws<ArgumentException>(() =>
             {
-                JsonSerializerWrapper.Deserialize<JsonClickEvent>(INVALID_JSON_SERIALIZATION);
+                JsonSerializerWrapper.Deserialize<JsonClickEvent>(INVALID_JSON);
             });
         }
 
         [Theory]
         [InlineData(null, typeof(ArgumentNullException))]
-        [InlineData("", typeof(ArgumentException))]
-        [InlineData("   ", typeof(ArgumentException))]
-        [InlineData("\t\t\t", typeof(ArgumentException))]
+        [InlineData(STRING_INPUT_EMPTY, typeof(ArgumentException))]
+        [InlineData(STRING_INPUT_SPACES, typeof(ArgumentException))]
+        [InlineData(STRING_INPUT_TABS, typeof(ArgumentException))]
         public void Validate_InvalidValue_ThrowsExpectedException(string? sTestValue, Type tExpectedExceptionType)
         {
-            JsonClickEvent oInvalidEvent = new JsonClickEvent()
-            {
-                Action = VALID_STRING_INPUT,
-                Value = sTestValue!
-            };
+            JsonClickEvent oInvalidEvent = CreateUnsafeInstance(VALID_STRING_INPUT, sTestValue!);
 
             ExceptionAssert.Throws(tExpectedExceptionType, oInvalidEvent.Validate);
         }
+
+        [Theory]
+        [InlineData(null, typeof(ArgumentNullException))]
+        [InlineData(STRING_INPUT_EMPTY, typeof(ArgumentException))]
+        [InlineData(STRING_INPUT_SPACES, typeof(ArgumentException))]
+        [InlineData(STRING_INPUT_TABS, typeof(ArgumentException))]
+        public void Validate_InvalidAction_ThrowsExpectedException(string? sTestValue, Type tExpectedExceptionType)
+        {
+            JsonClickEvent oInvalidEvent = CreateUnsafeInstance(sTestValue!, VALID_STRING_INPUT!);
+
+            ExceptionAssert.Throws(tExpectedExceptionType, oInvalidEvent.Validate);
+        }
+
+        #endregion // Public Method - Tests
     }
 }

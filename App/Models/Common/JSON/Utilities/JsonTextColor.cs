@@ -1,7 +1,7 @@
 ﻿using MinecraftServer.Common.General;
 using MinecraftServer.Models.Common.JSON.Constants;
 
-namespace MinecraftServer.Models.Common.JSON.Messages
+namespace MinecraftServer.Models.Common.JSON.Utilities
 {
     public static class JsonTextColor
     {
@@ -9,7 +9,7 @@ namespace MinecraftServer.Models.Common.JSON.Messages
 
         #region General
 
-        public const eTextColor DEFAULT_TEXT_COLOR = eTextColor.White;  
+        public const eTextColor DEFAULT_TEXT_COLOR = eTextColor.White;
 
         #endregion // General
 
@@ -18,8 +18,9 @@ namespace MinecraftServer.Models.Common.JSON.Messages
         /// <summary>
         /// Dictionary of enum keys mapping all available text colors in Minecraft, in their expected string format. 
         /// </summary>
-        private static readonly Dictionary<eTextColor, string> _dicColors = new Dictionary<eTextColor, string>()
+        private static readonly Dictionary<eTextColor, string?> _dicColors = new Dictionary<eTextColor, string?>()
         {
+            [eTextColor.None] = null, //return null so JSON will ignore.
             [eTextColor.Black] = "black",
             [eTextColor.DarkBlue] = "dark_blue",
             [eTextColor.DarkGreen] = "dark_green",
@@ -44,6 +45,7 @@ namespace MinecraftServer.Models.Common.JSON.Messages
 
         public enum eTextColor
         {
+            None,
             Black,
             DarkBlue,
             DarkGreen,
@@ -66,16 +68,34 @@ namespace MinecraftServer.Models.Common.JSON.Messages
 
         #endregion // Constants
 
-        #region Public Methods - Static
+        #region Public Extension Methods - Static
 
-        public static string GetString(this eTextColor eColor)
+        public static string? GetString(this eTextColor eColor)
         {
             if (!_dicColors.ContainsKey(eColor))
             {
                 Thrower.ThrowArgumentOutOfRangeException(JsonErrorMessages.TextColorNotFound(), nameof(_dicColors));
             }
-            
+
             return _dicColors[eColor];
+        }
+
+        public static eTextColor GetTextColorEnum(this string sColor)
+        {
+            if (!_dicColors.ContainsValue(sColor))
+            {
+                Thrower.ThrowArgumentOutOfRangeException(JsonErrorMessages.TextColorNotFound(), nameof(_dicColors));
+            }
+
+            foreach (KeyValuePair<eTextColor, string?> kvpColor in _dicColors)
+            {
+                if (kvpColor.Value == sColor)
+                {
+                    return kvpColor.Key;
+                }
+            }
+
+            return DEFAULT_TEXT_COLOR;
         }
 
         #endregion // Public Methods - Static

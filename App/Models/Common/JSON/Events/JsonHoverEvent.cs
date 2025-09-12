@@ -7,6 +7,12 @@ namespace MinecraftServer.Models.Common.JSON.Events
 {
     public class JsonHoverEvent : JsonBaseEvent
     {
+        #region Constants
+
+        internal const string SHOW_TEXT = "show_text";
+
+        #endregion // Constants
+
         #region Json Properties
 
         [NotNull]
@@ -35,19 +41,8 @@ namespace MinecraftServer.Models.Common.JSON.Events
 
         public static JsonHoverEvent ShowText(JsonMessage oText)
         {
-            return new JsonHoverEvent("show_text", oText);
+            return new JsonHoverEvent(SHOW_TEXT, oText);
         }
-
-        //TRR ADD NBT BUILDER FOR THESE, it must take an NBT tag item eventually...
-        //public static HoverEvent ShowItem(NbtItem oItem)
-        //{
-        //    return new HoverEvent("show_item", oItem);
-        //}
-
-        //public static HoverEvent ShowPlayer(NbtPlayer oPlayer)
-        //{
-        //    return new HoverEvent("show_player", oPlayer);
-        //}
 
         #endregion // Public Methods - Static
 

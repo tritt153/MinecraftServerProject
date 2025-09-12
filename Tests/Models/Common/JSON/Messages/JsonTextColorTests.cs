@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MinecraftServerTests.Models.JSON.Events
+namespace MinecraftServerTests.Models.Common.JSON.Messages
 {
-    internal class JsonHoverEventTests
+    internal class JsonTextColorTests
     {
     }
 }
