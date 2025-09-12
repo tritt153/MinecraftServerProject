@@ -1,6 +1,6 @@
 ﻿using MinecraftServer.Models.Common.JSON.Events;
 using MinecraftServer.Models.Common.JSON.Messages;
-using MinecraftServer.Models.Common.JSON.Utilities;
+using MinecraftServer.Models.Common.JSON.Utilities.Extension_Methods;
 using System.Windows;
 using static MinecraftServer.Models.Common.JSON.Utilities.JsonTextColor;
 

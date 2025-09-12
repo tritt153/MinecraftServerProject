@@ -3,7 +3,7 @@ using MinecraftServer.Models.Common.JSON.Messages;
 using static MinecraftServer.Models.Common.JSON.Constants.JsonConstants;
 using static MinecraftServer.Models.Common.JSON.Utilities.JsonTextColor;
 
-namespace MinecraftServer.Models.Common.JSON.Utilities
+namespace MinecraftServer.Models.Common.JSON.Utilities.Extension_Methods
 {
     public static class JsonStringExtenstions
     {
