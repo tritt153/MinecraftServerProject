@@ -1,10 +1,10 @@
 ﻿using MinecraftServer.Models.Common.JSON.Events;
 using MinecraftServer.Models.Common.JSON.Utilities;
-using MinecraftServerTests.Test_Utilities;
-using static MinecraftServerTests.Models.Common.JSON.Events.JsonEventsTestsData.JsonBaseEventTestsData;
-using static MinecraftServerTests.Test_Utilities.Constants;
+using MinecraftServerTests.Utilities;
+using static MinecraftServerTests.Targets.Models.Common.JSON.Events.Test_Data.JsonBaseEventTestsData;
+using static MinecraftServerTests.Utilities.Constants;
 
-namespace MinecraftServerTests.Models.Common.JSON.Events
+namespace MinecraftServerTests.Models.Common.JSON.Events.Tests
 {
     /// <summary>
     /// Contains unit testing logic for <see cref="JsonBaseEvent"/>.
@@ -39,7 +39,7 @@ namespace MinecraftServerTests.Models.Common.JSON.Events
         [Fact]
         public void Json_SerializedObject_ShouldDeserializeIntoSameObject()
         {
-            JsonBaseEvent oExpectedEvent = GetMinimalValidInstance();
+            JsonBaseEvent oExpectedEvent = GetMinimallyValidInstance();
 
             JsonBaseEvent? oActualEvent = JsonSerializerWrapper.Deserialize<JsonTestEvent>
                                          (JsonSerializerWrapper.Serialize(oExpectedEvent));
@@ -60,7 +60,7 @@ namespace MinecraftServerTests.Models.Common.JSON.Events
         [Fact]
         public void Json_ValidObject_SerializesCorrectly()
         {
-            JsonBaseEvent oTestSerialize = GetMinimalValidInstance();
+            JsonBaseEvent oTestSerialize = GetMinimallyValidInstance();
 
             Assert.Equal(EXPECTED_JSON, JsonSerializerWrapper.Serialize(oTestSerialize));
         }
@@ -89,7 +89,7 @@ namespace MinecraftServerTests.Models.Common.JSON.Events
         [Fact]
         public void Validate_Calls_ValidateInternal()
         {
-            JsonBaseEvent oEvent = GetMinimalValidInstance();
+            JsonBaseEvent oEvent = GetMinimallyValidInstance();
 
             oEvent.Validate();
 
@@ -114,7 +114,7 @@ namespace MinecraftServerTests.Models.Common.JSON.Events
         [Fact]
         public void Validate_ValidAction_DoesNotThrow()
         {
-            JsonBaseEvent oValidEvent = GetMinimalValidInstance();
+            JsonBaseEvent oValidEvent = GetMinimallyValidInstance();
 
             ExceptionAssert.DoesNotThrow(oValidEvent.Validate);
         }

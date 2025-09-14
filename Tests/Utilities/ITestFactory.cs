@@ -1,4 +1,4 @@
-﻿namespace MinecraftServerTests.Test_Utilities.Test_Factory
+﻿namespace MinecraftServerTests.Utilities
 {
     /// <summary>
     /// FOR TESTING ONLY: Interface used for enforcing creation of minimally valid instances of testable objects.
@@ -8,7 +8,7 @@
     {
         #region Public Methods - Static + Abstract
 
-        public static abstract T GetMinimalValidInstance();
+        public static abstract T GetMinimallyValidInstance();
 
         #endregion // Public Methods - Static + Abstract
     }

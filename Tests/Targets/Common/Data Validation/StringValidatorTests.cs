@@ -1,6 +1,6 @@
 ﻿using MinecraftServer.Common.General;
-using MinecraftServerTests.Test_Utilities;
-using static MinecraftServerTests.Test_Utilities.Constants;
+using MinecraftServerTests.Utilities;
+using static MinecraftServerTests.Utilities.Constants;
 
 namespace MinecraftServerTests.Common.Data_Validation
 {

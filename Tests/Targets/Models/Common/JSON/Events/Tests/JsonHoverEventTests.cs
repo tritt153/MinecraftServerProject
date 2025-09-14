@@ -1,8 +1,6 @@
 ﻿using MinecraftServer.Models.Common.JSON.Events;
-using static MinecraftServerTests.Test_Utilities.Constants;
-using static MinecraftServerTests.Models.Common.JSON.Events.JsonEventsTestsData.JsonHoverEventTestsData;
 
-namespace MinecraftServerTests.Models.Common.JSON.Events
+namespace MinecraftServerTests.Models.Common.JSON.Events.Tests
 {
     /// <summary>
     /// Contains unit testing logic for <see cref="JsonHoverEvent"/>.

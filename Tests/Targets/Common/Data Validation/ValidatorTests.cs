@@ -1,7 +1,7 @@
 ﻿using MinecraftServer.Common.General;
-using MinecraftServerTests.Test_Utilities;
+using MinecraftServerTests.Utilities;
 using Moq;
-using static MinecraftServerTests.Test_Utilities.Constants;
+using static MinecraftServerTests.Utilities.Constants;
 
 namespace MinecraftServerTests.Common.Data_Validation
 {

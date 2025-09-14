@@ -1,11 +1,11 @@
 ﻿using MinecraftServer.Models.Common.JSON.Messages;
 using MinecraftServer.Models.Common.JSON.Utilities;
-using MinecraftServerTests.Test_Utilities;
+using MinecraftServerTests.Utilities;
 using static MinecraftServer.Models.Common.JSON.Utilities.JsonTextColor;
-using static MinecraftServerTests.Models.Common.JSON.Messages.JsonMessagesTestsData.JsonMessageSegmentTestsData;
-using static MinecraftServerTests.Test_Utilities.Constants;
+using static MinecraftServerTests.Targets.Models.Common.JSON.Messages.Test_Data.JsonMessageSegmentTestsData;
+using static MinecraftServerTests.Utilities.Constants;
 
-namespace MinecraftServerTests.Models.Common.JSON.Messages
+namespace MinecraftServerTests.Models.Common.JSON.Messages.Tests
 {
     public class JsonMessageSegmentTests
     {
@@ -83,7 +83,7 @@ namespace MinecraftServerTests.Models.Common.JSON.Messages
         [Fact]
         public void ImplicitConversion_SegmentToMessage_CreatesExpectedMessage()
         {
-            JsonMessageSegment oSegment = GetMinimalValidInstance();
+            JsonMessageSegment oSegment = GetMinimallyValidInstance();
 
             JsonMessage oMessage = oSegment;
 
@@ -117,7 +117,7 @@ namespace MinecraftServerTests.Models.Common.JSON.Messages
         [InlineData(STRING_INPUT_EMPTY, typeof(ArgumentException))]
         public void AdditionOperator_OneInvalidSegment_ThrowsExpectedException(string? sStringInput, Type tExpectedExceptionType)
         {
-            JsonMessageSegment oSegmentLeft = GetMinimalValidInstance();
+            JsonMessageSegment oSegmentLeft = GetMinimallyValidInstance();
             JsonMessageSegment oSegmentRight = CreateUnsafeInstance(sStringInput!);
 
             ExceptionAssert.Throws(tExpectedExceptionType, () =>
@@ -135,8 +135,8 @@ namespace MinecraftServerTests.Models.Common.JSON.Messages
         [Fact]
         public void AdditionOperator_AddTwoValidSegments_CreatesExpectedMessage()
         {
-            JsonMessageSegment oSegmentLeft = GetMinimalValidInstance();
-            JsonMessageSegment oSegmentRight = GetMinimalValidInstance();
+            JsonMessageSegment oSegmentLeft = GetMinimallyValidInstance();
+            JsonMessageSegment oSegmentRight = GetMinimallyValidInstance();
 
             JsonMessage oCombinedMessage = oSegmentLeft + oSegmentRight;
 
@@ -158,7 +158,7 @@ namespace MinecraftServerTests.Models.Common.JSON.Messages
         [Fact]
         public void Json_MinimalValidObject_SerializesCorrectly()
         {
-            JsonMessageSegment oSerialize = GetMinimalValidInstance();
+            JsonMessageSegment oSerialize = GetMinimallyValidInstance();
 
             Assert.Equal(EXPECTED_JSON, JsonSerializerWrapper.Serialize(oSerialize));
         }
@@ -214,7 +214,7 @@ namespace MinecraftServerTests.Models.Common.JSON.Messages
         {
             ExceptionAssert.DoesNotThrow(() =>
             {
-                GetMinimalValidInstance().Validate();
+                GetMinimallyValidInstance().Validate();
             });
         }
 

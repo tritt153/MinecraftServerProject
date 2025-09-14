@@ -1,10 +1,10 @@
 ﻿using MinecraftServer.Models.Common.JSON.Events;
 using MinecraftServer.Models.Common.JSON.Utilities;
-using MinecraftServerTests.Test_Utilities;
-using static MinecraftServerTests.Models.Common.JSON.Events.JsonEventsTestsData.JsonClickEventTestsData;
-using static MinecraftServerTests.Test_Utilities.Constants;
+using MinecraftServerTests.Utilities;
+using static MinecraftServerTests.Utilities.Constants;
+using static MinecraftServerTests.Targets.Models.Common.JSON.Events.Test_Data.JsonClickEventTestsData;
 
-namespace MinecraftServerTests.Models.Common.JSON.Events
+namespace MinecraftServerTests.Models.Common.JSON.Events.Tests
 {
     /// <summary>
     /// Contains unit testing logic for <see cref="JsonClickEvent"/>.
@@ -149,7 +149,7 @@ namespace MinecraftServerTests.Models.Common.JSON.Events
         [Fact]
         public void Json_Serializes_Correctly()
         {
-            JsonClickEvent oTestSerialize = GetMinimalValidInstance();
+            JsonClickEvent oTestSerialize = GetMinimallyValidInstance();
 
             Assert.Equal(EXPECTED_JSON, JsonSerializerWrapper.Serialize(oTestSerialize));
         }
@@ -157,7 +157,7 @@ namespace MinecraftServerTests.Models.Common.JSON.Events
         [Fact]
         public void Json_SerializedObject_ShouldDeserializeIntoSameObject()
         {
-            JsonClickEvent oExpectedEvent = GetMinimalValidInstance();
+            JsonClickEvent oExpectedEvent = GetMinimallyValidInstance();
 
             JsonClickEvent? oActualEvent = JsonSerializerWrapper.Deserialize<JsonClickEvent>
                                          (JsonSerializerWrapper.Serialize(oExpectedEvent));

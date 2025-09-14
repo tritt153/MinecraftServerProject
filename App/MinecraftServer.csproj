@@ -9,9 +9,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Models\Core\Custom Commands\**" />
+    <Compile Remove="Models\Core\Player\**" />
+    <EmbeddedResource Remove="Models\Core\Custom Commands\**" />
+    <EmbeddedResource Remove="Models\Core\Player\**" />
+    <None Remove="Models\Core\Custom Commands\**" />
+    <None Remove="Models\Core\Player\**" />
+    <Page Remove="Models\Core\Custom Commands\**" />
+    <Page Remove="Models\Core\Player\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Data\" />
-    <Folder Include="Models\Core\Custom Commands\" />
-    <Folder Include="Models\Core\Player\" />
+    <Folder Include="Models\Core\" />
     <Folder Include="Views\" />
     <Folder Include="ViewModels\" />
   </ItemGroup>

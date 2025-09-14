@@ -1,5 +1,4 @@
-﻿using MinecraftServer.Common.General;
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics.CodeAnalysis;
 using static MinecraftServer.Logging.Constants.LogConstants;
 
 namespace MinecraftServer.Logging
