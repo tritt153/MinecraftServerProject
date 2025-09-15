@@ -1,4 +1,4 @@
-﻿using MinecraftServer.Common.General;
+﻿using MinecraftServer.Common.Data_Validation;
 using MinecraftServerTests.Utilities;
 using Moq;
 using static MinecraftServerTests.Utilities.Constants;

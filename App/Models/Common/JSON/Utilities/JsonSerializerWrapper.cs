@@ -1,4 +1,4 @@
-﻿using MinecraftServer.Common.General;
+﻿using MinecraftServer.Common.Data_Validation;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -8,7 +8,7 @@ namespace MinecraftServer.Models.Common.JSON.Utilities
     {
         #region Serializer Options
 
-        public static JsonSerializerOptions Options = new()
+        public static readonly JsonSerializerOptions Options = new()
         {
             WriteIndented = false,
             DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault,

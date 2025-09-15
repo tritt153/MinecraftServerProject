@@ -1,4 +1,4 @@
-﻿using MinecraftServer.Common.General;
+﻿using MinecraftServer.Common.Data_Validation;
 using MinecraftServer.Models.Common.JSON.Constants;
 
 namespace MinecraftServer.Models.Common.JSON.Utilities

@@ -1,4 +1,4 @@
-﻿namespace MinecraftServer.Common.General
+﻿namespace MinecraftServer.Common.Data_Validation
 {
     public static class ErrorMessages
     {

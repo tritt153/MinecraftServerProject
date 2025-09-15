@@ -27,22 +27,34 @@ namespace MinecraftServerTests.Targets.Models.Common.JSON.Messages.Test_Data
         /// Creates an invalid <see cref="JsonMessage"/> instance that has a null message segments list.
         /// </summary> 
         /// <returns>Invalid <see cref="JsonMessage"/> instance</returns>
-        public static JsonMessage CreateInstanceWithNullSegments()
+        public static JsonMessage CreateUnsafeInstance(params JsonMessageSegment[] oParams)
         {
-            return new JsonMessage() { RootText = string.Empty, Segments = null! };
+            return new JsonMessage() { RootText = string.Empty, Segments = [.. oParams] };
         }
 
         #endregion // Public Methods - Static
 
         #region ITestFactory
 
-        /// <summary>
-        /// Creates a <see cref="JsonMessageSegment"/> object that is guaranteed to be valid, and contain only necessary information.
-        /// </summary>
-        /// <returns>A minimally valid instance of <see cref="JsonMessageSegment"/></returns>
+        ///<inheritdoc cref="ITestFactory{T}.GetMinimallyValidInstance()"/>
         public static JsonMessage GetMinimallyValidInstance()
         {
             return new JsonMessage(JsonMessageSegmentTestsData.GetMinimallyValidInstance());
+        }
+
+        ///<inheritdoc cref="ITestFactory{T}.IsMinimallyValidInstance(T)"/>
+        public static bool IsMinimallyValidInstance(JsonMessage oInstance)
+        {
+            if (oInstance is not null)
+            {
+                if (oInstance.Segments is not null)
+                {
+                    return oInstance.Segments.Count == 1 &&
+                           JsonMessageSegmentTestsData.IsMinimallyValidInstance(oInstance.Segments.First());
+                }
+            }
+
+            return false;
         }
 
         #endregion // ITestFactory

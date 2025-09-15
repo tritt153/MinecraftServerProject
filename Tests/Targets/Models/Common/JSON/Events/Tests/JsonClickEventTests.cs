@@ -1,8 +1,8 @@
 ﻿using MinecraftServer.Models.Common.JSON.Events;
 using MinecraftServer.Models.Common.JSON.Utilities;
 using MinecraftServerTests.Utilities;
-using static MinecraftServerTests.Utilities.Constants;
 using static MinecraftServerTests.Targets.Models.Common.JSON.Events.Test_Data.JsonClickEventTestsData;
+using static MinecraftServerTests.Utilities.Constants;
 
 namespace MinecraftServerTests.Targets.Models.Common.JSON.Events.Tests
 {

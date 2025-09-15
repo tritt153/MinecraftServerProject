@@ -45,7 +45,7 @@ namespace MinecraftServerTests.Targets.Models.Common.JSON.Messages.Tests
         [Fact]
         public void Constructor_AllInput_CreatesExpectedObject()
         {
-            JsonMessageSegment oSegment = FullyInitalizedObject;
+            JsonMessageSegment oSegment =  CreateFullyInitalizedObject();
 
             Assert.Equal(VALID_STRING_INPUT, oSegment.Text);
             Assert.Equal(DEFAULT_TEXT_COLOR, oSegment.Color);
@@ -89,7 +89,7 @@ namespace MinecraftServerTests.Targets.Models.Common.JSON.Messages.Tests
 
             Assert.NotNull(oMessage);
             Assert.Single(oMessage.Segments);
-            Assert.Equal(VALID_STRING_INPUT, oMessage.Segments.First().Text);
+            Assert.True(IsMinimallyValidInstance(oMessage.Segments.First()));
         }
 
         [Theory]
@@ -142,8 +142,8 @@ namespace MinecraftServerTests.Targets.Models.Common.JSON.Messages.Tests
 
             Assert.NotNull(oCombinedMessage);
             Assert.Equal(2, oCombinedMessage.Segments.Count);
-            Assert.Equal(VALID_STRING_INPUT, oCombinedMessage.Segments[0].Text);
-            Assert.Equal(VALID_STRING_INPUT, oCombinedMessage.Segments[1].Text);
+            Assert.True(IsMinimallyValidInstance(oCombinedMessage.Segments[0]));
+            Assert.True(IsMinimallyValidInstance(oCombinedMessage.Segments[1]));
         }
 
         [Fact]
@@ -167,7 +167,7 @@ namespace MinecraftServerTests.Targets.Models.Common.JSON.Messages.Tests
         public void Json_FullyInitalizedObject_SerializesCorrectly()
         {
             Assert.Equal(EXPECTED_JSON_FULL, 
-                         JsonSerializerWrapper.Serialize(FullyInitalizedObject));
+                         JsonSerializerWrapper.Serialize(CreateFullyInitalizedObject()));
         }
 
         [Fact]
@@ -188,6 +188,7 @@ namespace MinecraftServerTests.Targets.Models.Common.JSON.Messages.Tests
             JsonMessageSegment? oTestDeserialize = JsonSerializerWrapper.Deserialize<JsonMessageSegment>(EXPECTED_JSON);
 
             Assert.NotNull(oTestDeserialize);
+
             Assert.Equal(VALID_STRING_INPUT, oTestDeserialize.Text);
             Assert.Null(oTestDeserialize.ColorString);
             Assert.Null(oTestDeserialize.Bold);

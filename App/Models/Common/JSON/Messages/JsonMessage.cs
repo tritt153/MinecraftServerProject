@@ -1,4 +1,4 @@
-﻿using MinecraftServer.Common.General;
+﻿using MinecraftServer.Common.Data_Validation;
 using MinecraftServer.Models.Common.JSON.Constants;
 using MinecraftServer.Models.Common.JSON.Utilities;
 using System.Diagnostics.CodeAnalysis;
@@ -10,9 +10,6 @@ namespace MinecraftServer.Models.Common.JSON.Messages
     {
         #region Json Properties
 
-        /// <summary>
-        /// This property is necessary for JSON strings in Minecraft, the JSON must start with a "text" attribute, or parsing will fail.
-        /// </summary>
         [NotNull]
         [JsonPropertyName("text")]
         public required string RootText { get; init; } = "";
@@ -30,14 +27,6 @@ namespace MinecraftServer.Models.Common.JSON.Messages
         public JsonMessage() { }
 
         [SetsRequiredMembers]
-        public JsonMessage(JsonMessageSegment oMsg)
-        {
-            Validator.ValidateParam(oMsg);
-
-            Segments = [oMsg];
-        }
-
-        [SetsRequiredMembers]
         public JsonMessage(params JsonMessageSegment[] oSegments)
         {
             Validator.ValidateParams(JsonErrorMessages.MessageSegmentInvalid(), oSegments);
@@ -50,9 +39,10 @@ namespace MinecraftServer.Models.Common.JSON.Messages
         #region ToString 
 
         /// <summary>
-        /// Serializes this object into a string in the format expected by Minecraft.
+        /// Serializes this object into a JSON string.
         /// </summary>
         /// <returns>string - The JSON message as a formatted string.</returns>
+        /// <seealso cref="JsonSerializerWrapper"/>
         public override string ToString()
         {
             return JsonSerializerWrapper.Serialize(this);
@@ -64,8 +54,7 @@ namespace MinecraftServer.Models.Common.JSON.Messages
 
         public static JsonMessage operator +(JsonMessage oFullMsg, JsonMessageSegment oSegment)
         {
-            Validator.ValidateParam(oFullMsg);
-            Validator.ValidateParam(oSegment);
+            Validator.ValidateParams(JsonErrorMessages.MessageSegmentInvalid(), oFullMsg, oSegment);
 
             oFullMsg.Segments.Add(oSegment);
 
@@ -74,8 +63,7 @@ namespace MinecraftServer.Models.Common.JSON.Messages
 
         public static JsonMessage operator +(JsonMessage oMsgLeft, JsonMessage oMsgRight)
         {
-            Validator.ValidateParam(oMsgLeft);
-            Validator.ValidateParam(oMsgLeft);
+            Validator.ValidateParams(JsonErrorMessages.MessageSegmentInvalid(), oMsgLeft, oMsgRight);
 
             foreach (JsonMessageSegment oSegment in oMsgRight.Segments)
             {
@@ -91,15 +79,19 @@ namespace MinecraftServer.Models.Common.JSON.Messages
 
         public void Validate()
         {
-            if (Segments == null || Segments.Count == 0)
+            if (Segments is null)
             {
-                Thrower.ThrowInvalidOperationException(JsonErrorMessages.MessageSegmentInvalid(), nameof(Segments));
+                Thrower.ThrowArgumentNullException(JsonErrorMessages.MessageNullSegments(), nameof(Segments));
+            }
+            else if (Segments.Count == 0)
+            {
+                Thrower.ThrowArgumentException(JsonErrorMessages.MessageNoSegments(), nameof(Segments));
             }
             else
             {
                 foreach (JsonMessageSegment oSegment in Segments)
-                { 
-                    oSegment.Validate(); 
+                {
+                    oSegment.Validate();
                 }
             }
         }

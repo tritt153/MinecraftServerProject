@@ -1,4 +1,4 @@
-﻿using MinecraftServer.Common.General;
+﻿using MinecraftServer.Common.Data_Validation;
 using MinecraftServer.Models.Common.JSON.Messages;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json.Serialization;
@@ -47,10 +47,9 @@ namespace MinecraftServer.Models.Common.JSON.Events
         #endregion // Public Methods - Static
 
         #region IValidatable
-
+        
         public override void ValidateInternal()
         {
-            base.Validate();
             Validator.ValidateParam(Contents);
         }
 

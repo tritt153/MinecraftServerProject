@@ -1,4 +1,5 @@
-﻿using MinecraftServer.Common.General;
+﻿using MinecraftServer.Common.Data_Validation;
+using MinecraftServer.Models.Common.JSON.Constants;
 using MinecraftServer.Models.Common.JSON.Events;
 using MinecraftServer.Models.Common.JSON.Utilities;
 using System.Diagnostics.CodeAnalysis;
@@ -9,7 +10,7 @@ namespace MinecraftServer.Models.Common.JSON.Messages
 {
     public record JsonMessageSegment : IValidatable
     {
-        #region Json Properties
+        #region Properties
 
         [NotNull] // or empty
         [JsonPropertyName("text")]
@@ -64,7 +65,7 @@ namespace MinecraftServer.Models.Common.JSON.Messages
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public JsonHoverEvent? HoverEvent { get; init; }
 
-        #endregion // Json Properties
+        #endregion // Properties
 
         #region Constructor
 
@@ -113,8 +114,7 @@ namespace MinecraftServer.Models.Common.JSON.Messages
 
         public static JsonMessage operator +(JsonMessageSegment oSegmentLeft, JsonMessageSegment oSegmentRight)
         {
-            Validator.ValidateParam(oSegmentLeft);
-            Validator.ValidateParam(oSegmentRight);
+            Validator.ValidateParams(JsonErrorMessages.MessageSegmentInvalid(), oSegmentLeft, oSegmentRight);
 
             return new JsonMessage(oSegmentLeft, oSegmentRight);
         }

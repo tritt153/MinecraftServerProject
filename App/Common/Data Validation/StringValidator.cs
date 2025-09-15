@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 
-namespace MinecraftServer.Common.General
+namespace MinecraftServer.Common.Data_Validation
 {
     internal static class StringValidator
     {
@@ -12,6 +12,7 @@ namespace MinecraftServer.Common.General
         /// <param name="sValue">The value to check.</param>
         /// <param name="sMessage">The exception message.</param>
         /// <param name="sParamName">The name of the parameter being checked.</param>
+        /// <exception cref="ArgumentException"/>
         internal static void CheckEmpty(string? sValue, string sMessage = "", string sParamName = "")
         {
             if (sValue is not null)
@@ -25,11 +26,12 @@ namespace MinecraftServer.Common.General
         }
 
         /// <summary>
-        /// Throws an error iff the given string contains only white space -> " \t", otherwise does nothing.
+        /// Throws an error iff the given string contains only white space, otherwise does nothing.
         /// </summary>
         /// <param name="sValue">The value to check.</param>
         /// <param name="sMessage">The exception message.</param>
         /// <param name="sParamName">The name of the parameter being checked.</param>
+        /// <exception cref="ArgumentException"/>
         internal static void CheckWhiteSpace(string? sValue, string sMessage = "", string sParamName = "")
         {
             if (sValue is not null)

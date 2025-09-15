@@ -19,6 +19,16 @@
             return $"One or more message segments are invalid.";
         }
 
+        public static string MessageNoSegments()
+        {
+            return $"Message must have at least one valid segment.";
+        }
+
+        public static string MessageNullSegments()
+        {
+            return $"Message segment list is null";
+        }
+
         #endregion // JSON Messages
     }
 }

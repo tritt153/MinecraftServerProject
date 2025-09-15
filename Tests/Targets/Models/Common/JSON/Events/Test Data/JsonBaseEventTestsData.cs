@@ -44,14 +44,21 @@ namespace MinecraftServerTests.Targets.Models.Common.JSON.Events.Test_Data
 
         #region ITestFactory
 
-        /// <summary>
-        /// Creates a <see cref="JsonBaseEvent"/> object that is guaranteed to be valid, and contain only necessary information.
-        /// </summary>
-        /// <returns>A minimally valid instance of <see cref="JsonBaseEvent"/></returns>
-        /// <seealso cref="JsonTestEvent"/>
+        /// <inheritdoc cref="ITestFactory{T}.GetMinimallyValidInstance()"/>
         public static JsonBaseEvent GetMinimallyValidInstance()
         {
             return new JsonTestEvent(VALID_STRING_INPUT);
+        }
+
+        /// <inheritdoc cref="ITestFactory{T}.IsMinimallyValidInstance(T)"/>
+        public static bool IsMinimallyValidInstance(JsonBaseEvent oInstance)
+        {
+            if (oInstance is not null)
+            {
+                return oInstance.Action == VALID_STRING_INPUT;
+            }
+
+            return false;
         }
 
         #endregion // ITestFactory

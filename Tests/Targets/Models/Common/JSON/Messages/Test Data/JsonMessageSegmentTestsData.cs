@@ -45,33 +45,6 @@ namespace MinecraftServerTests.Targets.Models.Common.JSON.Messages.Test_Data
 
         #endregion // Constants
 
-        #region Properties
-
-        /// <summary>
-        /// Creates and returns and instance of <see cref="JsonMessageSegment"/> that has all assignable fields set to minimally valid values.
-        /// </summary>
-        /// <returns>Fully initialized <see cref="JsonMessageSegment"/> instance</returns>
-        public static JsonMessageSegment FullyInitalizedObject
-        {
-            get
-            {
-                JsonClickEvent oClickEvent = JsonClickEventTestsData.GetMinimallyValidInstance();
-                JsonHoverEvent oHoverEvent = JsonHoverEventTestsData.GetMinimallyValidInstance();
-
-                return new JsonMessageSegment(VALID_STRING_INPUT,
-                                              DEFAULT_TEXT_COLOR,
-                                              true,
-                                              true,
-                                              true,
-                                              true,
-                                              true,
-                                              oClickEvent,
-                                              oHoverEvent);
-            }
-        }
-
-        #endregion // Properties
-
         #region Public Methods - Static
 
         /// <summary>
@@ -104,17 +77,45 @@ namespace MinecraftServerTests.Targets.Models.Common.JSON.Messages.Test_Data
             };
         }
 
+        /// <summary>
+        /// Creates and returns and instance of <see cref="JsonMessageSegment"/> that has all assignable fields set to minimally valid values.
+        /// </summary>
+        /// <returns>Fully initialized <see cref="JsonMessageSegment"/> instance</returns>
+
+        public static JsonMessageSegment CreateFullyInitalizedObject()
+        {
+            JsonClickEvent oClickEvent = JsonClickEventTestsData.GetMinimallyValidInstance();
+            JsonHoverEvent oHoverEvent = JsonHoverEventTestsData.GetMinimallyValidInstance();
+
+            return new JsonMessageSegment(VALID_STRING_INPUT,
+                                          DEFAULT_TEXT_COLOR,
+                                          true,
+                                          true,
+                                          true,
+                                          true,
+                                          true,
+                                          oClickEvent,
+                                          oHoverEvent);
+        }
         #endregion // Public Methods - Static
 
         #region ITestFactory
 
-        /// <summary>
-        /// Creates a <see cref="JsonMessageSegment"/> object that is guaranteed to be valid, and contain only necessary information.
-        /// </summary>
-        /// <returns>A minimally valid instance of <see cref="JsonMessageSegment"/></returns>
+        /// <inheritdoc cref="ITestFactory{T}.GetMinimallyValidInstance()"/>
         public static JsonMessageSegment GetMinimallyValidInstance()
         {
             return new JsonMessageSegment(VALID_STRING_INPUT);
+        }
+
+        /// <inheritdoc cref="ITestFactory{JsonMessageSegment}.IsMinimallyValidInstance(JsonMessageSegment)"/>
+        public static bool IsMinimallyValidInstance(JsonMessageSegment oInstance)
+        {
+            if (oInstance is not null)
+            {
+                return oInstance == GetMinimallyValidInstance();
+            }
+
+            return false;
         }
 
         #endregion // ITestFactory

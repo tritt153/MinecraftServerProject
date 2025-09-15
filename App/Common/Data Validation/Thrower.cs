@@ -1,13 +1,13 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 
-namespace MinecraftServer.Common.General
+namespace MinecraftServer.Common.Data_Validation
 {
     public static class Thrower
     {
         #region Public Methods - Static
 
         [DoesNotReturn]
-        public static void ThrowNullException(string sMessage, string sParamName)
+        public static void ThrowArgumentNullException(string sMessage, string sParamName)
         {
             throw new ArgumentNullException(sParamName, sMessage);
         }
