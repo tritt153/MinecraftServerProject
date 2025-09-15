@@ -4,7 +4,7 @@ using MinecraftServerTests.Utilities;
 using static MinecraftServerTests.Targets.Models.Common.JSON.Events.Test_Data.JsonBaseEventTestsData;
 using static MinecraftServerTests.Utilities.Constants;
 
-namespace MinecraftServerTests.Models.Common.JSON.Events.Tests
+namespace MinecraftServerTests.Targets.Models.Common.JSON.Events.Tests
 {
     /// <summary>
     /// Contains unit testing logic for <see cref="JsonBaseEvent"/>.

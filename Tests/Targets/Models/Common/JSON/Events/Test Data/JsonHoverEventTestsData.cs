@@ -1,5 +1,6 @@
 ﻿using MinecraftServer.Models.Common.JSON.Events;
 using MinecraftServer.Models.Common.JSON.Messages;
+using MinecraftServerTests.Targets.Models.Common.JSON.Events.Tests;
 using MinecraftServerTests.Targets.Models.Common.JSON.Messages.Test_Data;
 using MinecraftServerTests.Utilities;
 using static MinecraftServerTests.Utilities.Constants;

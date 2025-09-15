@@ -5,7 +5,7 @@ using static MinecraftServer.Models.Common.JSON.Utilities.JsonTextColor;
 using static MinecraftServerTests.Targets.Models.Common.JSON.Messages.Test_Data.JsonMessageSegmentTestsData;
 using static MinecraftServerTests.Utilities.Constants;
 
-namespace MinecraftServerTests.Models.Common.JSON.Messages.Tests
+namespace MinecraftServerTests.Targets.Models.Common.JSON.Messages.Tests
 {
     public class JsonMessageSegmentTests
     {

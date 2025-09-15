@@ -1,4 +1,5 @@
 ﻿using MinecraftServer.Models.Common.JSON.Events;
+using MinecraftServerTests.Targets.Models.Common.JSON.Events.Tests;
 using MinecraftServerTests.Utilities;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json.Serialization;

@@ -1,4 +1,5 @@
 ﻿using MinecraftServer.Models.Common.JSON.Messages;
+using MinecraftServerTests.Targets.Models.Common.JSON.Messages.Tests;
 using MinecraftServerTests.Utilities;
 
 namespace MinecraftServerTests.Targets.Models.Common.JSON.Messages.Test_Data
@@ -21,6 +22,15 @@ namespace MinecraftServerTests.Targets.Models.Common.JSON.Messages.Test_Data
         #endregion // Constants
 
         #region Public Methods - Static
+
+        /// <summary>
+        /// Creates an invalid <see cref="JsonMessage"/> instance that has a null message segments list.
+        /// </summary> 
+        /// <returns>Invalid <see cref="JsonMessage"/> instance</returns>
+        public static JsonMessage CreateInstanceWithNullSegments()
+        {
+            return new JsonMessage() { RootText = string.Empty, Segments = null! };
+        }
 
         #endregion // Public Methods - Static
 

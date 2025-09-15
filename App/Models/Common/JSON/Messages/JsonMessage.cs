@@ -95,6 +95,13 @@ namespace MinecraftServer.Models.Common.JSON.Messages
             {
                 Thrower.ThrowInvalidOperationException(JsonErrorMessages.MessageSegmentInvalid(), nameof(Segments));
             }
+            else
+            {
+                foreach (JsonMessageSegment oSegment in Segments)
+                { 
+                    oSegment.Validate(); 
+                }
+            }
         }
 
         #endregion // IValidatable
